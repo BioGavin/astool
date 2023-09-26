@@ -6,9 +6,9 @@
 
 # Scripts
 
-## astool
+## 1. astool
 
-### 1. ex_smiles
+### 1.1 ex_smiles
 
 - Extract SMILES of NPRs/PKs products from the antiSMASH json result file and output a table in tsv format cantaining "locus, region, smiles" information.
 
@@ -35,7 +35,7 @@ astool ex_smiles -i <json_dir> -o smiles.tsv -t mibig
 
 
 
-### 2. cds_len
+### 1.2 cds_len
 
 - Count the length of cds sequences in gbk files
 
@@ -53,7 +53,7 @@ output.tsv:
 
 
 
-### 3. cdsfromgbk2fasta
+### 1.3 cdsfromgbk2fasta
 
 - Save CDS sequences in gbk files in fasta format.
 
@@ -61,9 +61,9 @@ output.tsv:
 astool cdsfromgbk2fasta -i gbk_file -o fasta_file
 ```
 
-## extractHTML
+## 2. extractHTML
 
-### 1. ex_antismash_bgc.py
+### 2.1 ex_antismash_bgc.py
 
 ```bash
 python3 ex_antismash_bgc.py antismash_results antismash_results.xlsx
@@ -74,9 +74,9 @@ python3 ex_antismash_bgc.py antismash_results antismash_results.xlsx
 
 
 
-## extractJson
+## 3. extractJson
 
-### 1. ex_polymer_from_json.py
+### 3.1 ex_polymer_from_json.py
 
 Applicable: `antiSMASH` `?MIBiG`
 
@@ -97,7 +97,7 @@ If the json files fail to be processed, these files are saved in a log file.
 
 
 
-### 2. ex_knownclusterblast_from_json.py
+### 3.2 ex_knownclusterblast_from_json.py
 
 Applicable: `antiSMASH` `MIBiG`
 
@@ -129,7 +129,7 @@ knownclusterblast_hits_detail_output.tsv:
 
 
 
-### 3. ex_smiles_from_json.py
+### 3.3 ex_smiles_from_json.py
 
 Applicable: `antiSMASH` 
 
@@ -152,9 +152,9 @@ smiles.tsv:
 
 
 
-## extractGBK
+## 4. extractGBK
 
-### 1. ex_region_info_from_gbk.py
+### 4.1 ex_region_info_from_gbk.py
 
 Applicable: `antiSMASH` `?MIBiG`
 
@@ -173,7 +173,7 @@ output.tsv:
 
 
 
-### 2. ex_ripp_from_gbk.py
+### 4.2 ex_ripp_from_gbk.py
 
 Applicable: `antiSMASH` `?MIBiG`
 
@@ -193,7 +193,7 @@ output.tsv:
 
 
 
-### 3. ex_completeness_from_gbk.py
+### 4.3 ex_completeness_from_gbk.py
 
 Applicable: `antiSMASH` `MIBiG`
 
@@ -212,7 +212,7 @@ output.tsv:
 
 
 
-### 4. stats_domain_in_nrps_pks.py
+### 4.4 stats_domain_in_nrps_pks.py
 
 Applicable: `antiSMASH` `MIBiG`
 
@@ -235,7 +235,7 @@ The number of columns in the TSV file depends on the number of Domain types.
 
 
 
-### 5. ex_a_domain_from_gbk.py
+### 4.5 ex_a_domain_from_gbk.py
 
 Applicable: `antiSMASH`
 
@@ -268,7 +268,7 @@ YRSPQHNQQCFDSNGFYCSGDLVIMTPDGYLQVVGREKDQINR
 
 
 
-### 6. ex_asdomain_number_from_gbk.py
+### 4.6 ex_asdomain_number_from_gbk.py
 
 Applicable: `antiSMASH` `MIBiG`
 
@@ -292,7 +292,7 @@ output.tsv:
 
 
 
-### 7. ex_nrps_monomers_from_gbk.py
+### 4.7 ex_nrps_monomers_from_gbk.py
 
 Applicable: `antiSMASH` `?MIBiG`
 
@@ -313,7 +313,7 @@ output.tsv:
 
 
 
-### 8. ex_gene_info_from_an_antismash_output_folder.py
+### 4.8 ex_gene_info_from_an_antismash_output_folder.py
 
 Applicable: `antiSMASH` 
 
@@ -332,9 +332,9 @@ output.tsv:
 | GCA_000007325.1 | AE009951.2 | ctg1_1387 | 3279:4413(+) | biosynthetic-additional (smcogs) SMCOG1109:8-amino-7-oxononanoate  synthase (Score: 358.6; E-value: 6.6e-109) | MQKEKIIQELQELKNDNRFRTVKTNDKSLYNFSSNDYLSLAHDKDLLQKFYQNYNFDNYKLSSSSSRLIDGSYLTVMRLEKKVEEIYGKPCLVFNSGFDANSSVIETFFDKKSLIITDRLNHASIYEGCINSRAKILRYKHLDVSALEKLLKKYSENYNDILVVTETVYSMDGDCAEIKQICDLKEKYNFNLMVDEAHSYGAYGYGIAYNEKLVNKIDFLVIPLGKAGASVGAYVICDEIYKNYLINKSKKFIYSTALPPVNNLWNLFVLENLVNFQDRIEKFQELVTFSLNTLKKLNLKTKSTSHIISIIIGDNLNAVNLSNNLKELGYLAYAIKEPTVPKDTARLRISLTADMKKEDIETFFKTLKAEMKKIGVI |         |           |
 | GCA_000007325.1 | AE009951.2 | ctg1_1388 | 4413:5004(+) |                                                              | MSKIYFFNGWGMDKNLLIPIKNSTDYDIEVINFPYDIDKDFIDKDDSFIGYSFGVYYLNKFLSENKDLKYKKAIGINGLPQTIGKFGINEKMFNITLDTLNEENLEKFLINMDIDDSFCKSNKSFDEIKNELQFFKNNYRIIDNHIDFYYIGKNDRIIPANRLEKYCQNHSLAYKLLECGHYPFSYFKDFKDILDI |         |           |
 
-## Others
+## 5. Others
 
-### 1. collect_gbk_file.py
+### 5.1 collect_gbk_file.py
 
 Collect target gbk files from antiSMASH result folders.
 
@@ -348,7 +348,7 @@ collect_gbk_file.py smiles.tsv target_folder
 
 
 
-### 2. download_antismash_db.py
+### 5.2 download_antismash_db.py
 
 download antiSMASH database
 
@@ -362,7 +362,7 @@ download_antismash_db.py tsv_file target_path
 
 
 
-### 3. table2fasta.py
+### 5.3 table2fasta.py
 
 Convert sequences stored in tsv or excel files to fasta format.
 
@@ -379,7 +379,7 @@ table2fasta.py -i input.xlsx -n seq_id -s seq -t excel -o output.fasta
 
 
 
-### 4. concat_tsv.py
+### 5.4 concat_tsv.py
 
 Combine all tsv files in a folder into one file.
 
@@ -389,7 +389,7 @@ concat_tsv.py tsv tsv/antismash.cds.len.tsv
 
 
 
-### 5. as2bs.py
+### 5.5 as2bs.py
 
 Convert antiSMASH-BGC-Types to BiGSPACE-BGC-Types
 
@@ -403,9 +403,9 @@ as2bs.py -i antiSMASH-BGC-Type.xlsx -o bigscape-BGC-Type.xlsx
 
 
 
-## shell
+## 6. shell
 
-### 1. hoge
+### 6.1 hoge
 
 Copy and rename files based on map.
 
