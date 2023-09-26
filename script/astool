@@ -1,0 +1,73 @@
+#! /usr/bin/env python
+
+import argparse
+import astool
+from astool import ex_smiles, cds_len, cdsfromgbk2fasta
+
+# create the top-level parser
+parser = argparse.ArgumentParser(
+    prog='astool',
+    formatter_class=argparse.RawDescriptionHelpFormatter,
+    description='''
+This is a toolkit to handle antiSMASH output results.
+
+Author: Zhen-Yi Zhou
+E-mail: gavinchou64@gmail.com
+Source code: https://github.com/BioGavin/''',
+    epilog='''
+Use "astool [subcommand] --help" for more information about a command''')
+
+parser.add_argument("-v", "--version", action="version", version="%(prog)s version {}".format(astool.__version__))
+
+# create the sub-level parser
+subparsers = parser.add_subparsers(title='subcommands')
+
+# create the sub-parser for the "ex_smiles" command
+parser_getseq = subparsers.add_parser('ex_smiles', help='Extract SMILES of NPRs/PKs products from the antiSMASH json '
+                                                        'result file.',
+                                      formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+parser_getseq.add_argument('-i', '--json_dir', required=True,
+                           type=str,
+                           help='directory of a json file or a txt file containing one json file directory per line.')
+parser_getseq.add_argument('-o', '--output', required=True,
+                           type=str, help='output a tsv file containing SMILES information.')
+parser_getseq.add_argument('-t', '--type', required=True, choices=['antismash', 'mibig'],
+                           type=str, help='type of input json file source.')
+parser_getseq.add_argument('-v', '--verbose', required=False, default=False, action='store_true',
+                           help='print out details as commands are run.')
+parser_getseq.set_defaults(func=ex_smiles.ex_smiles)
+
+
+# create the sub-parser for the "cds_len" command
+parser_getseq = subparsers.add_parser('cds_len', help='Count the length of each sequence in the region gbk file.',
+                                      formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+parser_getseq.add_argument('-i', '--gbk_dir', required=True,
+                           type=str,
+                           help='directory of a gbk file or a txt file containing one gbk file directory per line.')
+parser_getseq.add_argument('-o', '--output', required=True,
+                           type=str, help='output a tsv file containing sequence length information.')
+parser_getseq.add_argument('-v', '--verbose', required=False, default=False, action='store_true',
+                           help='print out details as commands are run.')
+parser_getseq.set_defaults(func=cds_len.cds_len)
+
+
+# create the sub-parser for the "gbk2fasta" command
+parser_getseq = subparsers.add_parser('cdsfromgbk2fasta', help='Convert CDS from a gbk file to a fasta file.',
+                                      formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+parser_getseq.add_argument('-i', '--gbk_dir', required=True,
+                           type=str,
+                           help='directory of a input gbk file.')
+parser_getseq.add_argument('-o', '--fasta_dir', required=True,
+                           type=str, help='directory of a output fasta file.')
+parser_getseq.add_argument('-v', '--verbose', required=False, default=False, action='store_true',
+                           help='print out details as commands are run.')
+parser_getseq.set_defaults(func=cdsfromgbk2fasta.cdsfromgbk2fasta)
+
+
+def main():
+    args = parser.parse_args()
+    args.func(args)
+
+
+if __name__ == '__main__':
+    main()

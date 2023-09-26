@@ -1,0 +1,29 @@
+#!/usr/bin/env bash 
+
+###
+### hoge - Copy and rename files based on map.
+###
+### Usage:
+###   hoge <map>
+###
+### Options:
+###   <map>    Mapping table in tsv format (Column1: the original file path | Column2: the destination path of the copy)
+###   -h       Show this message.
+
+
+help() {
+	awk -F'### ' '/^###/ { print $2 }' "$0"
+}
+
+if [[ $# == 0 ]] || [[ "$1" == "-h" ]]; then
+	help
+	exit 1
+fi
+
+
+while read -a col
+do
+	cp ${col[0]} ${col[1]}
+done < $1
+
+

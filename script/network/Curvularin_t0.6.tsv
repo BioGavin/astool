@@ -1,0 +1,2 @@
+node1_id	node2_id	node1_smi	node2_smi	tanimoto	node1_type0	node2_type0	node1_type1	node2_type1
+2	1	OC1CC(O)CC(O)CC(O)CC(O)CCC(CCCCCC)C(OC(C)C(O)/C=C/C=C/C=C/C=C/C=C(C)/C(O)C1O)=O	OC1CC(O)CC(O)CC(O)CC(O)CC(O)C(C(O)CCCCC)C(OC(C)C(O)/C=C/C=C/C=C/C=C/C=C(C)/C(O)C1O)=O	0.6716417910447762	37	36	WH02	WH01
