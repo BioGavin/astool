@@ -61,6 +61,15 @@ output.tsv:
 astool cdsfromgbk2fasta -i gbk_file -o fasta_file
 ```
 
+## extractHTML
+
+### 1. ex_antismash_bgc.py
+
+```bash
+python3 ex_antismash_bgc.py antismash_results antismash_results.xlsx
+# The <antismash_results> folder stores the result folders of the antismash analysis
+```
+
 
 
 
