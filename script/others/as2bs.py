@@ -90,7 +90,7 @@ def convert_bgc(product):
         elif len(subtypes - ripps_products) == 0:
             return ("RiPPs")
         elif len(subtypes - saccharide_products) == 0:
-            return ("Saccharide")
+            return ("Saccharides")
         else:
             return ("Others")  # other hybrid
     # Others
