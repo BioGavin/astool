@@ -36,6 +36,7 @@ def convert_bgc(product):
                          'PKS-like', 'hglE-KS', 'prodigiosin'}
     nrps_products = {'nrps', 'NRPS', 'NRPS-like', 'thioamide-NRP',
                      'NAPAA'}
+    # Zhen-Yi Zhou(gavinchou99@126.com) added lanthidin to ripps_products
     ripps_products = {'lantipeptide', 'thiopeptide', 'bacteriocin', 'linaridin',
                       'cyanobactin', 'glycocin', 'LAP', 'lassopeptide',
                       'sactipeptide', 'bottromycin', 'head_to_tail', 'microcin',
@@ -45,7 +46,7 @@ def convert_bgc(product):
                       'lanthipeptide-class-iii', 'lanthipeptide-class-iv',
                       'lanthipeptide-class-v', 'ranthipeptide', 'redox-cofactor',
                       'thioamitides', 'epipeptide', 'cyclic-lactone-autoinducer',
-                      'spliceotide', 'RRE-containing', 'crocagin'}
+                      'spliceotide', 'RRE-containing', 'crocagin', 'lanthidin'}
     saccharide_products = {'amglyccycl', 'oligosaccharide', 'cf_saccharide',
                            'saccharide'}
     others_products = {'acyl_amino_acids', 'arylpolyene', 'aminocoumarin',
