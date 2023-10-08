@@ -76,10 +76,10 @@ def convert_bgc(product):
     elif product == 'terpene':
         return ("Terpene")
     # PKS/NRP hybrids
-    elif len(product.split(".")) > 1:
+    elif len(product.split("+")) > 1:
         # print("  Possible hybrid: (" + cluster + "): " + product)
         # cf_fatty_acid category contains a trailing empty space
-        subtypes = set(s.strip() for s in product.split("."))
+        subtypes = set(s.strip() for s in product.split("+"))
         if len(subtypes - (pks1_products | pksother_products | nrps_products)) == 0:
             if len(subtypes - nrps_products) == 0:
                 return ("NRPS")
