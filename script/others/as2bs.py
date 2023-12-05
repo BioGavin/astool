@@ -36,7 +36,7 @@ def convert_bgc(product):
                          'PKS-like', 'hglE-KS', 'prodigiosin'}
     nrps_products = {'nrps', 'NRPS', 'NRPS-like', 'thioamide-NRP',
                      'NAPAA'}
-    # Zhen-Yi Zhou(gavinchou99@126.com) added lanthidin to ripps_products
+    # Zhen-Yi Zhou(gavinchou99@126.com) added lanthidin, methanobactin to ripps_products
     ripps_products = {'lantipeptide', 'thiopeptide', 'bacteriocin', 'linaridin',
                       'cyanobactin', 'glycocin', 'LAP', 'lassopeptide',
                       'sactipeptide', 'bottromycin', 'head_to_tail', 'microcin',
@@ -46,9 +46,11 @@ def convert_bgc(product):
                       'lanthipeptide-class-iii', 'lanthipeptide-class-iv',
                       'lanthipeptide-class-v', 'ranthipeptide', 'redox-cofactor',
                       'thioamitides', 'epipeptide', 'cyclic-lactone-autoinducer',
-                      'spliceotide', 'RRE-containing', 'crocagin', 'lanthidin'}
+                      'spliceotide', 'RRE-containing', 'crocagin', "lanthidin", "methanobactin"}
+    # Zhen-Yi Zhou(gavinchou99@126.com) added 2dos to saccharide_products
     saccharide_products = {'amglyccycl', 'oligosaccharide', 'cf_saccharide',
-                           'saccharide'}
+                           'saccharide', "2dos"}
+    # Zhen-Yi Zhou(gavinchou99@126.com) added NI-siderophore, aminopolycarboxylic-acid, opine-like-metallophore, phosphonate-like to others_products
     others_products = {'acyl_amino_acids', 'arylpolyene', 'aminocoumarin',
                        'ectoine', 'butyrolactone', 'nucleoside', 'melanin',
                        'phosphoglycolipid', 'phenazine', 'phosphonate', 'other',
@@ -56,7 +58,8 @@ def convert_bgc(product):
                        'PUFA', 'furan', 'hserlactone', 'fused', 'cf_fatty_acid',
                        'siderophore', 'blactam', 'fatty_acid', 'PpyS-KS', 'CDPS',
                        'betalactone', 'PBDE', 'tropodithietic-acid', 'NAGGN',
-                       'halogenated', 'pyrrolidine', 'mycosporine-like'}
+                       'halogenated', 'pyrrolidine', 'mycosporine-like', "NI-siderophore",
+                       "aminopolycarboxylic-acid", "opine-like-metallophore", "phosphonate-like"}
 
     # PKS_Type I
     if product in pks1_products:
@@ -145,4 +148,3 @@ if __name__ == '__main__':
     new_df = convert_df(dynamic_df)
     out_df = pd.concat([static_df, new_df], axis=1)
     save_df(args.output, out_df)
-
