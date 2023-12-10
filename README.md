@@ -313,7 +313,7 @@ output.tsv:
 
 
 
-### 4.8 ex_gene_info_from_an_antismash_output_folder.py
+### 4.9 ex_gene_info_from_an_antismash_output_folder.py
 
 Applicable: `antiSMASH` 
 
@@ -331,6 +331,29 @@ output.tsv:
 | GCA_000007325.1 | AE009951.2 | ctg1_1386 | 2569:3184(+) |                                                              | MEKEKLIEEILEKEWSYFSKLNNIGGRADCQDNREDFIIMRKSQWETFNEETLISYLDDLNSKNNPLFQKYGQMMKYNSPQEYEKIKDILENPNKNKITLVEKIMSIYIEWEEEFFKKYPIFSSMGRPLYSTEDDNIETSIETYLRGELLSYSEKTLELYLKYIIEMKEKNINLAIKNMDNLASMQGFKNSDEVEEYYKNLQKN |         |           |
 | GCA_000007325.1 | AE009951.2 | ctg1_1387 | 3279:4413(+) | biosynthetic-additional (smcogs) SMCOG1109:8-amino-7-oxononanoate  synthase (Score: 358.6; E-value: 6.6e-109) | MQKEKIIQELQELKNDNRFRTVKTNDKSLYNFSSNDYLSLAHDKDLLQKFYQNYNFDNYKLSSSSSRLIDGSYLTVMRLEKKVEEIYGKPCLVFNSGFDANSSVIETFFDKKSLIITDRLNHASIYEGCINSRAKILRYKHLDVSALEKLLKKYSENYNDILVVTETVYSMDGDCAEIKQICDLKEKYNFNLMVDEAHSYGAYGYGIAYNEKLVNKIDFLVIPLGKAGASVGAYVICDEIYKNYLINKSKKFIYSTALPPVNNLWNLFVLENLVNFQDRIEKFQELVTFSLNTLKKLNLKTKSTSHIISIIIGDNLNAVNLSNNLKELGYLAYAIKEPTVPKDTARLRISLTADMKKEDIETFFKTLKAEMKKIGVI |         |           |
 | GCA_000007325.1 | AE009951.2 | ctg1_1388 | 4413:5004(+) |                                                              | MSKIYFFNGWGMDKNLLIPIKNSTDYDIEVINFPYDIDKDFIDKDDSFIGYSFGVYYLNKFLSENKDLKYKKAIGINGLPQTIGKFGINEKMFNITLDTLNEENLEKFLINMDIDDSFCKSNKSFDEIKNELQFFKNNYRIIDNHIDFYYIGKNDRIIPANRLEKYCQNHSLAYKLLECGHYPFSYFKDFKDILDI |         |           |
+
+
+
+### 4.8 ex_CDS_from_region_gbk.py
+
+Extract CDS feature in region GBK file. There are 3 output files for one region GBK file, `cds.faa`, `cds.fna`, `cds.tsv`. If the antiSMASH results are extracted in batch, three subfolders will be generated first, `fna`, `faa`, `tsv`, and then the results of each region GBK file extraction will be saved in the corresponding subfolders.
+
+Usage:
+
+```bash
+# 查看帮助
+python3 ex_CDS_from_region_gbk.py -h
+
+# example1：提取单个 region GBK 文件
+python ex_CDS_from_region_gbk.py -i GG657748.1.region001.gbk -o CDS
+
+# example1：批量提取 antiSMASH 结果中的 region GBK 文件
+python ex_CDS_from_region_gbk.py -i antismash_result_folder.list -o CDS
+```
+
+
+
+
 
 ## 5. Others
 

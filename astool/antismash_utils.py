@@ -220,6 +220,18 @@ class AntismashRegionGBKParser():
                     if len(contig_edge) > 1:
                         return contig_edge
 
+    @property
+    def contig_seq(self):
+        """Return the contig where the BGC region located."""
+        for seq_record in SeqIO.parse(self.gbk_dir, 'genbank'):
+            return seq_record.seq
+
+    @property
+    def contig_locus(self):
+        """Return the contig where the BGC region located."""
+        for seq_record in SeqIO.parse(self.gbk_dir, 'genbank'):
+            return seq_record.id
+
     def get_nrps_pks_domains(self):
         """Return aSDomain of nrps and pks domains."""
         for seq_record in SeqIO.parse(self.gbk_dir, 'genbank'):
@@ -283,6 +295,26 @@ class AntismashRegionGBKParser():
                     locus_tag = feature.qualifiers['locus_tag'][0]
                     translation = feature.qualifiers['translation'][0]
                     cds_record = CDSRecord(record_id, location, locus_tag, translation)
+                    cds_records.append(cds_record)
+        return cds_records
+
+    def ex_cds_all(self):
+        cds_records = []
+        for seq_record in SeqIO.parse(self.gbk_dir, 'genbank'):
+            record_id = seq_record.id
+            for feature in seq_record.features:
+                if feature.type == 'CDS':
+                    CDSRecord = namedtuple("CDSRecord", ["record_id", "location", "locus_tag", "translation",
+                                                         "gene_functions", "gene_kind", "sec_met_domain"])
+                    location = feature.location
+                    qualifiers = feature.qualifiers
+                    locus_tag = qualifiers.get('locus_tag')[0]
+                    translation = qualifiers.get('translation')[0]
+                    gene_functions = qualifiers.get('gene_functions')
+                    gene_kind = qualifiers.get('gene_kind')
+                    sec_met_domain = qualifiers.get('sec_met_domain')
+                    cds_record = CDSRecord(record_id, location, locus_tag, translation,
+                                           gene_functions, gene_kind, sec_met_domain)
                     cds_records.append(cds_record)
         return cds_records
 
@@ -365,6 +397,7 @@ class AntismashRegionGBKParser():
                         leader_seq += qualifiers.get("leader_sequence")
                         core_seq += qualifiers.get("core_sequence")
         return leader_seq, core_seq
+
 
 if __name__ == '__main__':
     json_dir = "/Users/zhouzhenyi/Documents/github/astool/test_data/antiSMASH/GCA_003204095.1_ASM320409v1_genomic/GCA_003204095.1_ASM320409v1_genomic.json"
