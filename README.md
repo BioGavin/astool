@@ -313,7 +313,7 @@ output.tsv:
 
 
 
-### 4.9 ex_gene_info_from_an_antismash_output_folder.py
+### 4.8 ex_gene_info_from_an_antismash_output_folder.py
 
 Applicable: `antiSMASH` 
 
@@ -334,7 +334,7 @@ output.tsv:
 
 
 
-### 4.8 ex_CDS_from_region_gbk.py
+### 4.9 ex_CDS_from_region_gbk.py
 
 Extract CDS feature in region GBK file. There are 3 output files for one region GBK file, `cds.faa`, `cds.fna`, `cds.tsv`. If the antiSMASH results are extracted in batch, three subfolders will be generated first, `fna`, `faa`, `tsv`, and then the results of each region GBK file extraction will be saved in the corresponding subfolders.
 

@@ -1,3 +1,5 @@
+#! /usr/bin/env python3
+
 import argparse
 import os
 
@@ -33,7 +35,7 @@ def ex_contig_and_cds_for_single(gbk_file):
     return contig_locus, contig_seq, cds_records
 
 
-def write_cds_fna(cds_records, contig_seq, output_fna):
+def write_cds_fna(assembly_accession, contig_locus, cds_records, contig_seq, output_fna):
     records = []
     for cds in cds_records:
         if cds.gene_functions:
@@ -41,19 +43,21 @@ def write_cds_fna(cds_records, contig_seq, output_fna):
         else:
             description = ""
         location = cds.location
-        record = SeqRecord(seq=Seq(contig_seq[location.start: location.end]), id=cds.locus_tag, description=description)
+        record = SeqRecord(seq=Seq(contig_seq[location.start: location.end]),
+                           id="-".join([assembly_accession, contig_locus, cds.locus_tag]), description=description)
         records.append(record)
     SeqIO.write(records, output_fna, "fasta")
 
 
-def write_cds_faa(cds_records, output_faa):
+def write_cds_faa(assembly_accession, contig_locus, cds_records, output_faa):
     records = []
     for cds in cds_records:
         if cds.gene_functions:
             description = " | ".join(cds.gene_functions)
         else:
             description = ""
-        record = SeqRecord(seq=Seq(cds.translation), id=cds.locus_tag, description=description)
+        record = SeqRecord(seq=Seq(cds.translation), id="-".join([assembly_accession, contig_locus, cds.locus_tag]),
+                           description=description)
         records.append(record)
     SeqIO.write(records, output_faa, "fasta")
 
@@ -102,7 +106,7 @@ def help():
         epilog='''
 examples:
 1. python ex_CDS_from_region_gbk.py -i GG657748.1.region001.gbk -o CDS
-2. python ex_CDS_from_region_gbk.py -i antismash_result_folder.list -o CDS
+2. python ex_CDS_from_region_gbk.py -i antismash_result_folder.list -o CDS -f
         '''
     )
 
@@ -123,16 +127,20 @@ if __name__ == '__main__':
     args = help()
     gbk_dir_list = get_gbk_dir(args.input)
     if len(gbk_dir_list) == 1:  # 处理单个Region的GBK文件
-        contig_locus, contig_seq, cds_records = ex_contig_and_cds_for_single(gbk_dir_list[0])
 
-        write_cds_faa(cds_records,
-                      os.path.join(args.output, os.path.basename(gbk_dir_list[0]).replace("gbk", "cds.faa")))
-
-        write_cds_fna(cds_records, contig_seq,
-                      os.path.join(args.output, os.path.basename(gbk_dir_list[0]).replace("gbk", "cds.fna")))
         genome_file_name = os.path.basename(os.path.dirname(gbk_dir_list[0]))
         if args.format:
             genome_file_name = genome_file_name[:15]
+
+        contig_locus, contig_seq, cds_records = ex_contig_and_cds_for_single(gbk_dir_list[0])
+
+        write_cds_faa(assembly_accession=genome_file_name, contig_locus=contig_locus, cds_records=cds_records,
+                      output_faa=os.path.join(args.output, os.path.basename(gbk_dir_list[0]).replace("gbk", "cds.faa")))
+
+        write_cds_fna(assembly_accession=genome_file_name, contig_locus=contig_locus, cds_records=cds_records,
+                      contig_seq=contig_seq,
+                      output_fna=os.path.join(args.output, os.path.basename(gbk_dir_list[0]).replace("gbk", "cds.fna")))
+
         cds_df = gen_cds_df(genome_file_name, contig_locus, cds_records)
         save_dataframe2tsv(cds_df,
                            os.path.join(args.output, os.path.basename(gbk_dir_list[0]).replace("gbk", "cds.tsv")))
@@ -151,12 +159,13 @@ if __name__ == '__main__':
             genome_file_name = os.path.basename(os.path.dirname(gbk_dir))
             if args.format:
                 genome_file_name = genome_file_name[:15]
-            write_cds_faa(cds_records,
-                          os.path.join(faa_output_folder,
-                                       genome_file_name + "." + gbk_file_name.replace("gbk", "cds.faa")))
-            write_cds_fna(cds_records, contig_seq,
-                          os.path.join(fna_output_folder,
-                                       genome_file_name + "." + gbk_file_name.replace("gbk", "cds.fna")))
+            write_cds_faa(assembly_accession=genome_file_name, contig_locus=contig_locus, cds_records=cds_records,
+                          output_faa=os.path.join(faa_output_folder,
+                                                  genome_file_name + "." + gbk_file_name.replace("gbk", "cds.faa")))
+            write_cds_fna(assembly_accession=genome_file_name, contig_locus=contig_locus, cds_records=cds_records,
+                          contig_seq=contig_seq,
+                          output_fna=os.path.join(fna_output_folder,
+                                                  genome_file_name + "." + gbk_file_name.replace("gbk", "cds.fna")))
             cds_df = gen_cds_df(genome_file_name, contig_locus, cds_records)
             save_dataframe2tsv(cds_df,
                                os.path.join(tsv_output_folder,
