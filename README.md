@@ -353,6 +353,22 @@ python ex_CDS_from_region_gbk.py -i antismash_result_folder.list -o CDS
 
 
 
+### 4.10 ex_candidate_cluster_from_region_gbk.py
+
+Usage:
+
+```bash
+# 查看帮助
+python3 ex_candidate_cluster_from_region_gbk.py -h
+
+# example1: 
+python ex_candidate_cluster_from_region_gbk.py -i Genome000001.region001.gbk -n 1 -o cc.fna
+```
+
+
+
+
+
 
 
 ## 5. Others
