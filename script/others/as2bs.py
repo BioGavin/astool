@@ -34,7 +34,8 @@ def convert_bgc(product):
     pksother_products = {'transatpks', 't2pks', 't3pks', 'otherks', 'hglks',
                          'transAT-PKS', 'transAT-PKS-like', 'T2PKS', 'T3PKS',
                          'PKS-like', 'hglE-KS', 'prodigiosin'}
-    nrps_products = {'nrps', 'NRPS', 'NRPS-like', 'thioamide-NRP',
+    # Zhen-Yi Zhou(gavinchou99@126.com) added NRP-metallophore to nrps_products
+    nrps_products = {'nrps', 'NRPS', 'NRPS-like', 'thioamide-NRP', 'NRP-metallophore',
                      'NAPAA'}
     # Zhen-Yi Zhou(gavinchou99@126.com) added lanthidin, methanobactin to ripps_products
     ripps_products = {'lantipeptide', 'thiopeptide', 'bacteriocin', 'linaridin',
