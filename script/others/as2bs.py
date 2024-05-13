@@ -20,6 +20,16 @@ def read_input(input_file):
     return static_df, dynamic_df
 
 
+def read_input2(input_file):
+    if input_file.endswith("xlsx"):
+        input_df = pd.read_excel(input_file)
+    elif input_file.endswith("tsv"):
+        input_df = pd.read_csv(input_file, sep='\t')
+    else:
+        raise ValueError("The input file is not in the specified format (tsv or xlsx).")
+    return input_df
+
+
 def convert_bgc(product):
     """Sort BGC by its type. Uses antiSMASH annotations
     (see
@@ -110,6 +120,11 @@ def convert_bgc(product):
         return ("Others")
 
 
+def convert_col(df, col):
+    df["bigscape_type"] = df[col].apply(convert_bgc)
+    return df
+
+
 def convert_df(df):
     catgory_dict = {"PKSI": [], "PKSother": [], "NRPS": [], "RiPPs": [],
                     "Saccharides": [], "Terpene": [], "PKS-NRP_Hybrids": [], "Others": []}
@@ -138,6 +153,7 @@ def parse_args():
         description="Convert antiSMASH-BGC-Types to BiGSPACE-BGC-Types")
     parser.add_argument('-i', '--input', required=True, type=str, help="Input tsv or excel")
     parser.add_argument('-o', '--output', required=True, type=str, help="Output tsv or excel")
+    parser.add_argument('-c', '--column', type=str, help="The column name of the column to be converted")
     args = parser.parse_args()
 
     return args
@@ -145,7 +161,13 @@ def parse_args():
 
 if __name__ == '__main__':
     args = parse_args()
-    static_df, dynamic_df = read_input(args.input)
-    new_df = convert_df(dynamic_df)
-    out_df = pd.concat([static_df, new_df], axis=1)
-    save_df(args.output, out_df)
+    if args.column:
+        df = read_input2(args.input)
+        new_df = convert_col(df, args.column)
+        save_df(args.output, new_df)
+
+    else:
+        static_df, dynamic_df = read_input(args.input)
+        new_df = convert_df(dynamic_df)
+        out_df = pd.concat([static_df, new_df], axis=1)
+        save_df(args.output, out_df)

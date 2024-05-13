@@ -436,6 +436,15 @@ Support file format: xlsx, tsv
 
 ```bash
 as2bs.py -i antiSMASH-BGC-Type.xlsx -o bigscape-BGC-Type.xlsx
+# Here, antiSMASH-BGC-Type.xlsx is the output from ex_antismash_bgc.py
+```
+
+
+
+Convert for one column:
+
+```bash
+as2bs.py -i antiSMASH-BGC-Type.tsv -c antiSMASH-BGC -o bigscape-BGC-Type.tsv
 ```
 
 
