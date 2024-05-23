@@ -120,7 +120,16 @@ def convert_bgc(product):
         return ("Others")
 
 
+def rm_other(product_str):
+    product_set = set(product_str.strip().split("+"))
+    product_set.discard("other")
+    product_str_wo_other = "+".join(product_set)
+    return product_str_wo_other
+
+
 def convert_col(df, col):
+    # remove other from products
+    df[col] = df[col].apply(rm_other)
     df["bigscape_type"] = df[col].apply(convert_bgc)
     return df
 
@@ -130,7 +139,10 @@ def convert_df(df):
                     "Saccharides": [], "Terpene": [], "PKS-NRP_Hybrids": [], "Others": []}
     columns_ls = df.columns
     for column in columns_ls:
-        catgory_dict[convert_bgc(column.strip())].append(column)
+        column_wo_other_set = set(column.strip().split("+"))
+        column_wo_other_set.discard("other")
+        column_wo_other = "+".join(column_wo_other_set)
+        catgory_dict[convert_bgc(column_wo_other)].append(column)
 
     new_df = pd.DataFrame()
     for k, v in catgory_dict.items():

@@ -399,6 +399,17 @@ class AntismashRegionGBKParser():
         return leader_seq, core_seq
 
 
+    def ex_cds_number(self):
+        """Extract the number of CDS."""
+        cds_number = 0
+        for seq_record in SeqIO.parse(self.gbk_dir, 'genbank'):
+            for feature in seq_record.features:
+                if feature.type == 'CDS':
+                    cds_number += 1
+        return cds_number
+
+
+
 if __name__ == '__main__':
     json_dir = "/Users/zhouzhenyi/Documents/github/astool/test_data/antiSMASH/GCA_003204095.1_ASM320409v1_genomic/GCA_003204095.1_ASM320409v1_genomic.json"
     json_file = AntismashJsonParser(json_dir)

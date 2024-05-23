@@ -367,6 +367,16 @@ python ex_candidate_cluster_from_region_gbk.py -i Genome000001.region001.gbk -n 
 
 
 
+### 4.11 ex_CDS_number_from_region_gbk.py
+
+Usage:
+
+```bash
+python3 ex_CDS_number_from_region_gbk.py -l gbk.list -o cds_number.tsv
+```
+
+
+
 
 
 
